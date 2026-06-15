@@ -313,16 +313,47 @@ footer{background:var(--abysse);color:rgba(255,255,255,.7);overflow:hidden}
   .hero-actions{justify-content:flex-start}
 }
 @media (max-width:720px){
-  .liens{position:fixed;inset:0;background:var(--abysse);flex-direction:column;
-    justify-content:center;gap:2rem;transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
-  .liens.ouvert{transform:none}
-  .liens a{font-size:1.4rem;font-family:var(--d)}
-  .burger{display:block}
+  .liens{
+    position:fixed;top:0;left:0;width:100%;height:100%;height:100dvh;
+    background:var(--abysse);
+    flex-direction:column;justify-content:center;gap:2rem;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s ease;
+    z-index:250;
+    overflow:hidden;
+  }
+  .liens.ouvert{opacity:1;pointer-events:auto}
+  .liens a{font-size:1.4rem;font-family:var(--d);opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}
+  .liens.ouvert a{opacity:1;transform:none}
+  .liens.ouvert a:nth-child(1){transition-delay:.06s}
+  .liens.ouvert a:nth-child(2){transition-delay:.12s}
+  .liens.ouvert a:nth-child(3){transition-delay:.18s}
+  .liens.ouvert a:nth-child(4){transition-delay:.24s}
+  .liens.ouvert a:nth-child(5){transition-delay:.3s}
+  .liens.ouvert a:nth-child(6){transition-delay:.36s}
+  .burger{display:block;position:relative;z-index:300}
+  body.menu-ouvert{overflow:hidden;height:100%}
 }
+
+/* ====== bouton retour en haut ====== */
+#top-btn{
+  position:fixed;bottom:1.6rem;right:1.4rem;z-index:400;
+  width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--or);color:var(--nuit);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;font-weight:700;
+  box-shadow:0 6px 24px rgba(212,175,55,.45);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+#top-btn.visible{opacity:1;transform:none;pointer-events:auto}
+#top-btn:hover{background:var(--or2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(212,175,55,.55)}
 </style>
 </head>
 <body>
 
+<button id="top-btn" aria-label="Retour en haut">↑</button>
 <div class="curseur" aria-hidden="true"></div>
 
 <nav id="nav">
@@ -650,9 +681,18 @@ addEventListener('scroll',()=>nav.classList.toggle('plein',scrollY>40),{passive:
 
 // ---- menu mobile
 const burger=document.getElementById('burger'),liens=document.getElementById('liens');
-burger.addEventListener('click',()=>{burger.classList.toggle('x');liens.classList.toggle('ouvert')});
-liens.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-  burger.classList.remove('x');liens.classList.remove('ouvert')}));
+function ouvrirMenu(){
+  burger.classList.add('x');
+  liens.classList.add('ouvert');
+  document.body.classList.add('menu-ouvert');
+}
+function fermerMenu(){
+  burger.classList.remove('x');
+  liens.classList.remove('ouvert');
+  document.body.classList.remove('menu-ouvert');
+}
+burger.addEventListener('click',()=>liens.classList.contains('ouvert')?fermerMenu():ouvrirMenu());
+liens.querySelectorAll('a').forEach(a=>a.addEventListener('click',fermerMenu));
 
 // ---- apparitions
 const io=new IntersectionObserver(es=>es.forEach(e=>{
@@ -702,6 +742,11 @@ if(matchMedia('(pointer:fine)').matches){
     el.addEventListener('mouseleave',()=>c.classList.remove('grand'));
   });
 }
+
+// ---- bouton retour en haut
+const topBtn=document.getElementById('top-btn');
+addEventListener('scroll',()=>topBtn.classList.toggle('visible',scrollY>400),{passive:true});
+topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:mvt?'smooth':'auto'}));
 </script>
 </body>
 </html>
