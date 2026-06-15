@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEVA® — Bénin Vivi Académie | Godomey, Cotonou</title>
+<meta name="description" content="BEVA — Bénin Vivi Académie. Japonais, anglais, graphisme, montage vidéo. Petites classes, méthode japonaise, à Godomey, Cotonou.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bleu:#0B3D91; --nuit:#051E4A; --abysse:#03142F;
+  --or:#D4AF37; --or2:#E8C967; --or-fonce:#B8860B;
+  --blanc:#FFFFFF; --ivoire:#F7F8FB; --gris:#E6E6E6; --texte:#5A6478; --noir:#0A0F1E;
+  --d:'Fraunces',Georgia,serif; --b:'Outfit',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--or);color:var(--nuit)}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);background:var(--blanc);color:var(--noir);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem)}
+
+/* ====== curseur (desktop) ====== */
+@media (pointer:fine){
+  .curseur{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;
+    background:var(--or);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+    transition:width .25s,height .25s,opacity .25s;mix-blend-mode:difference}
+  .curseur.grand{width:54px;height:54px;opacity:.85}
+}
+@media (pointer:coarse){.curseur{display:none}}
+
+/* ====== apparitions ====== */
+.rv{opacity:0;transform:translateY(36px);filter:blur(6px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s}
+.rv.on{opacity:1;transform:none;filter:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;filter:none;transition:none}
+  .defil-piste,.defil-piste.inverse{animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ====== nav ====== */
+nav{position:fixed;inset:0 0 auto 0;z-index:200;transition:background .4s,border-color .4s;
+  border-bottom:1px solid transparent}
+nav.plein{background:rgba(5,30,74,.88);backdrop-filter:blur(14px);border-color:rgba(212,175,55,.22)}
+.nav-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+  padding:1rem clamp(1.2rem,4vw,3rem)}
+.nav-in img{height:38px}
+.liens{display:flex;align-items:center;gap:2.2rem}
+.liens a{color:var(--blanc);font-size:.88rem;font-weight:500;letter-spacing:.02em;position:relative;opacity:.9}
+.liens a:not(.cta)::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;
+  background:var(--or);transition:width .3s}
+.liens a:hover{opacity:1}
+.liens a:not(.cta):hover::after{width:100%}
+.cta{background:var(--or);color:var(--nuit)!important;font-weight:700;padding:.6rem 1.4rem;
+  border-radius:99px;transition:transform .25s,box-shadow .25s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(212,175,55,.4)}
+.burger{display:none;background:none;border:none;cursor:pointer;z-index:300;padding:8px}
+.burger span{display:block;width:26px;height:2px;background:var(--blanc);margin:6px 0;transition:.35s}
+.burger.x span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.x span:nth-child(2){opacity:0}
+.burger.x span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ====== hero ====== */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  background:var(--abysse);overflow:hidden;color:var(--blanc);padding:5.5rem 0 clamp(3rem,7vh,5rem)}
+.hero>.fond{object-position:center 64%}
+.hero-voile{position:absolute;inset:0;
+  background:linear-gradient(102deg,rgba(3,20,47,.93) 8%,rgba(5,30,74,.66) 48%,rgba(11,61,145,.28) 100%),
+             linear-gradient(180deg,rgba(3,20,47,.45),transparent 30%,transparent 55%,rgba(3,20,47,.88))}
+.hero-grain{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);background-size:26px 26px}
+.hero-haut{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;
+  padding:0 clamp(1.2rem,4vw,3rem)}
+.sur-titre{display:flex;align-items:center;gap:16px;color:var(--or);
+  font-size:clamp(.7rem,1.4vw,.85rem);letter-spacing:.42em;text-transform:uppercase;font-weight:600;margin-bottom:1rem}
+.sur-titre::before{content:"";width:54px;height:1px;background:var(--or)}
+.titan{font-family:var(--d);font-weight:900;font-size:clamp(4.6rem,19vw,15.5rem);line-height:.86;
+  letter-spacing:-.015em;margin-left:-.04em}
+.titan sup{font-size:.14em;vertical-align:super;color:var(--or);font-weight:600;letter-spacing:0}
+.hero-bas{position:relative;z-index:2;max-width:1240px;margin:1.6rem auto 0;width:100%;
+  padding:0 clamp(1.2rem,4vw,3rem);display:grid;grid-template-columns:1.15fr .85fr;gap:2.5rem;align-items:end}
+.hero-pitch{font-size:clamp(1.02rem,2vw,1.3rem);font-weight:300;color:rgba(255,255,255,.85);max-width:520px}
+.hero-pitch b{font-weight:600;color:var(--blanc)}
+.hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2rem;border-radius:99px;
+  font-weight:700;font-size:.98rem;transition:transform .25s,box-shadow .25s;cursor:pointer;border:none}
+.btn:hover{transform:translateY(-3px)}
+.btn-or{background:var(--or);color:var(--nuit);box-shadow:0 8px 30px rgba(212,175,55,.35)}
+.btn-or:hover{box-shadow:0 14px 40px rgba(212,175,55,.5)}
+.btn-ghost{background:transparent;color:var(--blanc);border:1px solid rgba(255,255,255,.4)}
+.btn-ghost:hover{border-color:var(--or);color:var(--or2)}
+.fond{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ====== marquee ====== */
+.defil{overflow:hidden;white-space:nowrap;border-block:1px solid rgba(212,175,55,.28);
+  background:var(--abysse);padding:1.05rem 0;position:relative}
+.defil.clair{background:var(--blanc);border-color:var(--gris)}
+.defil-piste{display:inline-flex;gap:0;animation:defiler 26s linear infinite;will-change:transform}
+.defil-piste.inverse{animation-direction:reverse}
+@keyframes defiler{to{transform:translateX(-50%)}}
+.defil span{font-family:var(--d);font-weight:700;font-size:clamp(1.1rem,2.6vw,1.7rem);
+  letter-spacing:.06em;padding:0 1.6rem;color:var(--blanc)}
+.defil span.creux{color:transparent;-webkit-text-stroke:1px rgba(212,175,55,.85)}
+.defil.clair span{color:var(--bleu)}
+.defil.clair span.creux{color:transparent;-webkit-text-stroke:1px var(--or)}
+.defil i{color:var(--or);font-style:normal;font-size:.8em;vertical-align:.12em}
+
+/* ====== chiffres ====== */
+.stats{background:var(--blanc);padding:clamp(3.5rem,7vw,6rem) 0}
+.stats-g{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat{border-left:1px solid var(--gris);padding-left:1.6rem}
+.stat b{display:block;font-family:var(--d);font-weight:900;color:var(--bleu);
+  font-size:clamp(2.6rem,5.5vw,4.4rem);line-height:1;letter-spacing:-.02em}
+.stat b small{font-size:.45em;color:var(--or-fonce);font-weight:700}
+.stat span{display:block;margin-top:.6rem;font-size:.86rem;color:var(--texte);
+  letter-spacing:.14em;text-transform:uppercase}
+
+/* ====== entêtes de section ====== */
+.tete{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;
+  margin-bottom:clamp(2.5rem,5vw,4rem);flex-wrap:wrap}
+.tete .gauche .micro{display:flex;align-items:center;gap:12px;font-size:.74rem;letter-spacing:.4em;
+  text-transform:uppercase;font-weight:600;color:var(--or-fonce);margin-bottom:1rem}
+.tete .gauche .micro::before{content:"";width:40px;height:1px;background:var(--or)}
+.tete h2{font-family:var(--d);font-weight:900;font-size:clamp(2.4rem,6vw,4.6rem);
+  line-height:1;letter-spacing:-.02em;color:var(--nuit)}
+.tete h2 em{font-style:italic;font-weight:600;color:var(--bleu)}
+.tete .droite{max-width:380px;color:var(--texte);font-size:.98rem;padding-bottom:.4rem}
+.sombre .tete h2{color:var(--blanc)}
+.sombre .tete h2 em{color:var(--or2)}
+.sombre .tete .micro{color:var(--or)}
+.sombre .tete .droite{color:rgba(255,255,255,.7)}
+
+/* ====== formations (rangées numérotées) ====== */
+.formations{background:var(--ivoire);padding:clamp(4rem,9vw,8rem) 0}
+.rangée{border-top:1px solid var(--gris);position:relative;overflow:hidden}
+.rangée:last-of-type{border-bottom:1px solid var(--gris)}
+.rangée::before{content:"";position:absolute;inset:0;background:var(--nuit);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:0}
+@media (hover:hover) and (pointer:fine){.rangée:hover::before{transform:scaleY(1)}}
+.rangée-in{position:relative;z-index:1;display:grid;
+  grid-template-columns:70px 150px 1fr 1.4fr auto auto;align-items:center;gap:1.8rem;
+  padding:1.8rem clamp(1.2rem,4vw,3rem);max-width:1240px;margin:0 auto;
+  transition:color .35s}
+.vignette{width:150px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;flex-shrink:0;
+  background:linear-gradient(155deg,var(--bleu),var(--abysse));position:relative;
+  border:1px solid rgba(212,175,55,.25)}
+.vignette svg{position:absolute;inset:0;width:100%;height:100%}
+@media (hover:hover) and (pointer:fine){.rangée:hover .vignette{border-color:rgba(212,175,55,.6)}}
+.num{font-family:var(--d);font-weight:600;font-size:1.2rem;color:var(--or-fonce);transition:color .35s}
+.rangée h3{font-family:var(--d);font-weight:700;font-size:clamp(1.5rem,3.2vw,2.3rem);
+  color:var(--nuit);letter-spacing:-.01em;transition:color .35s}
+.rangée .desc{font-size:.93rem;color:var(--texte);max-width:420px;transition:color .35s}
+.rangée .tarif{text-align:right;white-space:nowrap}
+.rangée .tarif b{display:block;font-family:var(--d);font-weight:700;font-size:1.5rem;color:var(--nuit);transition:color .35s}
+.rangée .tarif span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texte);transition:color .35s}
+.rangée .go{width:52px;height:52px;border:1px solid var(--gris);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--nuit);
+  transition:all .35s;flex-shrink:0}
+@media (hover:hover) and (pointer:fine){.rangée:hover .num{color:var(--or)}}
+@media (hover:hover) and (pointer:fine){.rangée:hover h3{color:var(--blanc)}}
+@media (hover:hover) and (pointer:fine){.rangée:hover .desc{color:rgba(255,255,255,.7)}}
+@media (hover:hover) and (pointer:fine){.rangée:hover .tarif b{color:var(--or2)}}
+@media (hover:hover) and (pointer:fine){.rangée:hover .tarif span{color:rgba(255,255,255,.6)}}
+@media (hover:hover) and (pointer:fine){.rangée:hover .go{background:var(--or);border-color:var(--or);color:var(--nuit);transform:rotate(-45deg)}}
+.rangée.future .num{color:var(--or)}
+.etiquette-or{display:inline-block;background:var(--or);color:var(--nuit);font-size:.62rem;
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2px;
+  vertical-align:middle;margin-left:.8rem;transform:translateY(-4px)}
+.note-paiement{max-width:1240px;margin:2.4rem auto 0;padding:0 clamp(1.2rem,4vw,3rem);
+  color:var(--texte);font-size:.92rem}
+.note-paiement b{color:var(--bleu)}
+
+/* ====== open class ====== */
+.openclass{background:var(--blanc);padding:clamp(4rem,9vw,8rem) 0}
+.oc-g{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2.4rem,6vw,5rem);align-items:center}
+.oc-flyer{position:relative}
+.oc-flyer img{border-radius:8px;box-shadow:0 30px 70px rgba(5,30,74,.35);
+  transform:rotate(-2deg);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.oc-flyer:hover img{transform:rotate(0deg) scale(1.02)}
+.oc-flyer::after{content:"GRATUIT";position:absolute;top:-18px;right:-10px;
+  background:var(--or);color:var(--nuit);font-weight:700;font-size:.78rem;letter-spacing:.18em;
+  padding:.5rem 1.1rem;border-radius:99px;transform:rotate(6deg);box-shadow:0 8px 22px rgba(212,175,55,.45)}
+.oc-txt .micro{display:flex;align-items:center;gap:12px;font-size:.74rem;letter-spacing:.4em;
+  text-transform:uppercase;font-weight:600;color:var(--or-fonce);margin-bottom:1rem}
+.oc-txt .micro::before{content:"";width:40px;height:1px;background:var(--or)}
+.oc-txt h2{font-family:var(--d);font-weight:900;font-size:clamp(2.2rem,5vw,3.8rem);
+  line-height:1.02;letter-spacing:-.02em;color:var(--nuit);margin-bottom:1.2rem}
+.oc-txt h2 em{font-style:italic;font-weight:600;color:var(--bleu)}
+.oc-txt>p{color:var(--texte);max-width:520px;margin-bottom:1.4rem}
+.oc-bonus{display:flex;flex-direction:column;gap:.3rem;border-left:3px solid var(--or);
+  background:var(--ivoire);padding:1.1rem 1.4rem;border-radius:0 6px 6px 0;max-width:520px;margin-bottom:1.2rem}
+.oc-bonus b{color:var(--nuit)}
+.oc-bonus span{font-size:.92rem;color:var(--texte)}
+.oc-note{font-size:.85rem;color:var(--texte);margin-bottom:1.8rem}
+
+/* ====== parcours ====== */
+.parcours{background:var(--nuit);color:var(--blanc);padding:clamp(4rem,9vw,8rem) 0;position:relative;overflow:hidden}
+.parcours .filigrane{position:absolute;left:-6%;bottom:-10%;width:min(40vw,440px);opacity:.05;pointer-events:none}
+.etapes-g{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.etape{border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:2.2rem 2rem;
+  background:linear-gradient(160deg,rgba(255,255,255,.045),transparent 60%);
+  transition:border-color .3s,transform .3s}
+.etape:hover{border-color:rgba(212,175,55,.55);transform:translateY(-4px)}
+.etape .e-num{font-family:var(--d);font-weight:900;font-size:3rem;line-height:1;
+  color:transparent;-webkit-text-stroke:1px var(--or);margin-bottom:1.1rem}
+.etape h3{font-family:var(--d);font-weight:700;font-size:1.45rem;margin-bottom:.5rem;color:var(--blanc)}
+.etape p{font-size:.93rem;color:rgba(255,255,255,.72);font-weight:300}
+.etape a{color:var(--or2);font-weight:500;border-bottom:1px solid rgba(212,175,55,.4)}
+
+/* ====== galerie campus ====== */
+.campus{background:var(--blanc);padding:clamp(4rem,9vw,8rem) 0}
+.galerie{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:110px;gap:1rem}
+.ph{position:relative;border-radius:6px;overflow:hidden;display:flex;align-items:flex-end;
+  background:var(--nuit)}
+.ph .fond{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.ph:hover .fond{transform:scale(1.05)}
+.ph::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(11,61,145,.12),transparent 40%)}
+.ph .l{position:relative;z-index:2;width:100%;padding:1.1rem 1.2rem;
+  background:linear-gradient(transparent,rgba(3,20,47,.92));color:var(--blanc)}
+.ph .l small{display:block;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--or2);margin-bottom:.15rem}
+.ph .l span{font-family:var(--d);font-weight:600;font-size:1.05rem}
+.ph.a{grid-column:span 7;grid-row:span 3}
+.ph.b{grid-column:span 5;grid-row:span 3}
+.ph.c{grid-column:span 4;grid-row:span 2}
+.ph.d{grid-column:span 4;grid-row:span 2}
+.ph.e{grid-column:span 4;grid-row:span 2}
+
+/* ====== fondateur ====== */
+.fondateur{background:var(--ivoire);padding:clamp(4rem,9vw,8rem) 0}
+.fond-g{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.portrait{aspect-ratio:4/5;border-radius:6px;position:relative;overflow:hidden;background:var(--nuit)}
+.portrait .l{position:absolute;left:1.2rem;bottom:1.1rem;color:var(--blanc);z-index:2;
+  font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 8px rgba(3,20,47,.8)}
+.portrait::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(transparent 65%,rgba(3,20,47,.65))}
+.fond-txt blockquote{font-family:var(--d);font-weight:600;font-style:italic;
+  font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.25;color:var(--nuit)}
+.fond-txt blockquote span{color:var(--or-fonce)}
+.fond-txt .qui{margin-top:1.8rem;display:flex;align-items:center;gap:1rem}
+.fond-txt .qui .trait{width:44px;height:1px;background:var(--or)}
+.fond-txt .qui b{display:block;color:var(--nuit)}
+.fond-txt .qui small{color:var(--texte);font-size:.84rem}
+.fond-stats{margin-top:2rem;display:flex;gap:2.6rem;flex-wrap:wrap}
+.fond-stats div b{font-family:var(--d);font-weight:900;font-size:1.9rem;color:var(--bleu)}
+.fond-stats div span{display:block;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--texte)}
+
+/* ====== FAQ ====== */
+.faq{background:var(--blanc);padding:clamp(4rem,9vw,8rem) 0}
+.q{border-top:1px solid var(--gris)}
+.q:last-child{border-bottom:1px solid var(--gris)}
+.q button{width:100%;background:none;border:none;cursor:pointer;display:flex;
+  align-items:center;justify-content:space-between;gap:1.5rem;padding:1.7rem 0;text-align:left}
+.q button h3{font-family:var(--d);font-weight:700;font-size:clamp(1.15rem,2.4vw,1.6rem);color:var(--nuit)}
+.q .plus{width:42px;height:42px;border:1px solid var(--gris);border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--bleu);
+  transition:all .35s}
+.q.ouvert .plus{background:var(--or);border-color:var(--or);color:var(--nuit);transform:rotate(45deg)}
+.q .rep{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}
+.q .rep p{padding:0 0 1.7rem;color:var(--texte);max-width:720px}
+
+/* ====== CTA final ====== */
+.final{background:var(--nuit);color:var(--blanc);padding:clamp(6rem,12vw,10rem) 0;
+  position:relative;overflow:hidden;text-align:center}
+.final .fond{object-position:center 30%;opacity:.5}
+.final::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(3,20,47,.82),rgba(5,30,74,.55) 50%,rgba(3,20,47,.88))}
+.final h2{font-family:var(--d);font-weight:900;font-size:clamp(2.6rem,7vw,5.4rem);
+  line-height:1.02;letter-spacing:-.02em;position:relative}
+.final h2 em{font-style:italic;font-weight:600;color:var(--or2)}
+.final p{position:relative;margin:1.4rem auto 2.6rem;max-width:480px;color:rgba(255,255,255,.75);font-weight:300}
+.final .btn{position:relative}
+
+/* ====== pied ====== */
+footer{background:var(--abysse);color:rgba(255,255,255,.7);overflow:hidden}
+.pied-haut{max-width:1240px;margin:0 auto;padding:4rem clamp(1.2rem,4vw,3rem) 2.5rem;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2.5rem}
+.pied-haut img{height:60px;margin-bottom:1.2rem}
+.pied-haut p{font-size:.9rem;font-weight:300;max-width:300px}
+.pied-haut h4{color:var(--or);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.1rem}
+.pied-haut ul{list-style:none}
+.pied-haut li{margin-bottom:.6rem;font-size:.92rem}
+.pied-haut a:hover{color:var(--or2)}
+.pied-titan{font-family:var(--d);font-weight:900;font-size:clamp(5rem,21vw,17rem);line-height:.78;
+  text-align:center;color:transparent;-webkit-text-stroke:1px rgba(212,175,55,.35);
+  letter-spacing:-.02em;user-select:none;transform:translateY(.14em)}
+.pied-bas{border-top:1px solid rgba(255,255,255,.08);padding:1.4rem clamp(1.2rem,4vw,3rem);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-size:.78rem;
+  color:rgba(255,255,255,.4);max-width:1240px;margin:0 auto}
+
+/* ====== responsive ====== */
+@media (max-width:980px){
+  .oc-g{grid-template-columns:1fr}
+  .oc-flyer{max-width:420px;margin:0 auto}
+  .rangée-in{grid-template-columns:60px 1fr auto;
+    grid-template-areas:"v v v" "n t go" "n d go" "n p go"}
+  .vignette{grid-area:v;width:100%;aspect-ratio:21/9}
+  .num{grid-area:n}.rangée h3{grid-area:t}.rangée .desc{grid-area:d;max-width:none}
+  .rangée .tarif{grid-area:p;text-align:left;margin-top:.4rem}.rangée .go{grid-area:go}
+  .rangée-in{gap:.5rem 1.4rem;padding:1.6rem clamp(1.2rem,4vw,3rem)}
+  .fond-g{grid-template-columns:1fr}
+  .stats-g{grid-template-columns:repeat(2,1fr)}
+  .galerie{grid-auto-rows:90px}
+  .ph.a{grid-column:span 12;grid-row:span 3}.ph.b{grid-column:span 12;grid-row:span 3}
+  .ph.c,.ph.d,.ph.e{grid-column:span 12;grid-row:span 2}
+  .etapes-g{grid-template-columns:1fr}
+  .hero-bas{grid-template-columns:1fr;gap:1.6rem}
+  .hero-actions{justify-content:flex-start}
+}
+@media (max-width:720px){
+  .liens{position:fixed;inset:0;background:var(--abysse);flex-direction:column;
+    justify-content:center;gap:2rem;transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .liens.ouvert{transform:none}
+  .liens a{font-size:1.4rem;font-family:var(--d)}
+  .burger{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="curseur" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#haut" aria-label="BEVA — Accueil"><img src="images/logo-beva-or.png" alt="BEVA — Bénin Vivi Académie"></a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="liens" id="liens">
+      <a href="#formations">Formations</a>
+      <a href="#openclass">Open Class</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#campus">Campus</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/2290159717192" class="cta">S'inscrire</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="haut">
+  <img class="fond" src="images/campus-eleves.jpg" alt="Le campus BEVA à Atrokpocodji avec les élèves">
+  <div class="hero-voile" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="hero-haut">
+    <div class="sur-titre rv">Bénin Vivi Académie — Atrokpocodji · Cotonou</div>
+    <h1 class="titan rv d1">BEVA<sup>®</sup></h1>
+  </div>
+
+  <div class="hero-bas">
+    <p class="hero-pitch rv d2">L'école qui apporte <b>la méthode japonaise</b> au Bénin.
+      Japonais, anglais, graphisme et montage vidéo — en petites classes de 10 élèves maximum.</p>
+    <div class="hero-actions rv d3">
+      <a class="btn btn-or" href="https://wa.me/2290159717192">S'inscrire sur WhatsApp&nbsp;→</a>
+      <a class="btn btn-ghost" href="#formations">Voir les formations</a>
+    </div>
+  </div>
+</header>
+
+<div class="defil" aria-hidden="true">
+  <div class="defil-piste">
+    <span>APPRENDS</span><span><i>◆</i></span><span class="creux">AGIS</span><span><i>◆</i></span>
+    <span>CONSTRUIS TON AVENIR</span><span><i>◆</i></span><span class="creux">BEVA</span><span><i>◆</i></span>
+    <span>APPRENDS</span><span><i>◆</i></span><span class="creux">AGIS</span><span><i>◆</i></span>
+    <span>CONSTRUIS TON AVENIR</span><span><i>◆</i></span><span class="creux">BEVA</span><span><i>◆</i></span>
+  </div>
+</div>
+
+<section class="stats">
+  <div class="wrap stats-g">
+    <div class="stat rv"><b><span class="compteur" data-cible="4">0</span><small>+1</small></b><span>Formations pro</span></div>
+    <div class="stat rv d1"><b><span class="compteur" data-cible="10">0</span><small>max</small></b><span>Élèves par classe</span></div>
+    <div class="stat rv d2"><b><span class="compteur" data-cible="3">0</span><small>mois</small></b><span>Par cycle complet</span></div>
+    <div class="stat rv d3"><b><span class="compteur" data-cible="550">0</span><small>K+</small></b><span>Abonnés Chado Japon</span></div>
+  </div>
+</section>
+
+<section class="formations" id="formations">
+  <div class="wrap tete">
+    <div class="gauche rv">
+      <div class="micro">Nos formations</div>
+      <h2>Choisis<br><em>ta voie.</em></h2>
+    </div>
+    <div class="droite rv d1">Des séances de 90 minutes, des formateurs exigeants et des compétences
+      directement monnayables. 3 mois de formation + 1 mois offert — commence quand tu veux.</div>
+  </div>
+
+  <a class="rangée rv" href="https://wa.me/2290159717192">
+    <div class="rangée-in">
+      <div class="num">01</div>
+      <div class="vignette" aria-hidden="true"><svg viewBox="0 0 200 150" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round">
+        <circle cx="148" cy="48" r="22" stroke-opacity=".9"/>
+        <path d="M38 58 Q75 48 112 58" /><path d="M44 70 H106"/>
+        <path d="M52 70 V118 M98 70 V118"/><path d="M75 58 V70"/>
+        <path d="M30 56 Q75 44 120 56" stroke-width="4"/>
+        <text x="62" y="108" font-family="serif" font-size="30" fill="#D4AF37" stroke="none">あ</text>
+        <circle cx="32" cy="126" r="2" fill="#D4AF37" stroke="none"/><circle cx="170" cy="118" r="2" fill="#D4AF37" stroke="none"/>
+        <path d="M160 100 h14 M167 93 v14" stroke-opacity=".5"/>
+      </svg></div>
+      <h3>Japonais</h3>
+      <p class="desc">Apprends le japonais de zéro. Une porte unique vers le Japon — études, travail, culture. La seule formation de ce type au Bénin.</p>
+      <div class="tarif"><b>3 mois</b><span>+ 1 mois offert</span></div>
+      <div class="go">→</div>
+    </div>
+  </a>
+  <a class="rangée rv" href="https://wa.me/2290159717192">
+    <div class="rangée-in">
+      <div class="num">02</div>
+      <div class="vignette" aria-hidden="true"><svg viewBox="0 0 200 150" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M30 40 h80 a10 10 0 0 1 10 10 v28 a10 10 0 0 1 -10 10 h-50 l-16 16 v-16 h-14 a10 10 0 0 1 -10 -10 v-28 a10 10 0 0 1 10 -10 z"/>
+        <text x="48" y="74" font-family="sans-serif" font-weight="bold" font-size="22" fill="#D4AF37" stroke="none">Hello!</text>
+        <path d="M170 62 h-30 a10 10 0 0 0 -10 10 v22 a10 10 0 0 0 10 10 h14 l12 12 v-12 h4 a10 10 0 0 0 10 -10 v-22 a10 10 0 0 0 -10 -10 z" stroke-opacity=".7"/>
+        <circle cx="146" cy="88" r="2" fill="#D4AF37" stroke="none"/><circle cx="156" cy="88" r="2" fill="#D4AF37" stroke="none"/><circle cx="166" cy="88" r="2" fill="#D4AF37" stroke="none"/>
+      </svg></div>
+      <h3>Anglais</h3>
+      <p class="desc">L'anglais pratique pour les études et les affaires — avec accès à l'English Only Room, l'espace où l'on ne parle qu'anglais.</p>
+      <div class="tarif"><b>3 mois</b><span>+ 1 mois offert</span></div>
+      <div class="go">→</div>
+    </div>
+  </a>
+  <a class="rangée rv" href="https://wa.me/2290159717192">
+    <div class="rangée-in">
+      <div class="num">03</div>
+      <div class="vignette" aria-hidden="true"><svg viewBox="0 0 200 150" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M30 110 C 70 30, 130 30, 170 110"/>
+        <rect x="24" y="104" width="12" height="12" fill="#051E4A"/><rect x="164" y="104" width="12" height="12" fill="#051E4A"/>
+        <circle cx="100" cy="50" r="6" fill="#051E4A"/>
+        <path d="M100 50 L70 22 M100 50 L130 22" stroke-dasharray="4 5" stroke-opacity=".7"/>
+        <circle cx="70" cy="22" r="3.5" fill="#D4AF37" stroke="none"/><circle cx="130" cy="22" r="3.5" fill="#D4AF37" stroke="none"/>
+        <path d="M96 120 l8 18 4 -8 8 -4 z" fill="#D4AF37" stroke="none"/>
+      </svg></div>
+      <h3>Graphisme</h3>
+      <p class="desc">Illustrator, Photoshop, Canva. Maîtrise les outils des pros et commence à facturer tes premières créations.</p>
+      <div class="tarif"><b>3 mois</b><span>+ 1 mois offert</span></div>
+      <div class="go">→</div>
+    </div>
+  </a>
+  <a class="rangée rv" href="https://wa.me/2290159717192">
+    <div class="rangée-in">
+      <div class="num">04</div>
+      <div class="vignette" aria-hidden="true"><svg viewBox="0 0 200 150" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="46" y="26" width="108" height="70" rx="10"/>
+        <path d="M92 46 l28 15 -28 15 z" fill="#D4AF37" stroke="none"/>
+        <path d="M40 116 h120" stroke-opacity=".5"/>
+        <rect x="40" y="110" width="34" height="12" rx="2" fill="#D4AF37" stroke="none" opacity=".85"/>
+        <rect x="80" y="110" width="50" height="12" rx="2" stroke-opacity=".8"/>
+        <rect x="136" y="110" width="24" height="12" rx="2" fill="#D4AF37" stroke="none" opacity=".5"/>
+        <path d="M104 130 v8" stroke-opacity=".6"/>
+      </svg></div>
+      <h3>Montage vidéo</h3>
+      <p class="desc">TikTok, YouTube, publicités : monte des vidéos que les marques recherchent, au Bénin comme à l'étranger.</p>
+      <div class="tarif"><b>3 mois</b><span>+ 1 mois offert</span></div>
+      <div class="go">→</div>
+    </div>
+  </a>
+  <a class="rangée future rv" href="https://wa.me/2290159717192">
+    <div class="rangée-in">
+      <div class="num">05</div>
+      <div class="vignette" aria-hidden="true"><svg viewBox="0 0 200 150" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="70" y="45" width="60" height="60" rx="8"/>
+        <path d="M70 60 H52 M70 75 H52 M70 90 H52 M130 60 h18 M130 75 h18 M130 90 h18 M85 45 V28 M100 45 V28 M115 45 V28 M85 105 v17 M100 105 v17 M115 105 v17"/>
+        <circle cx="52" cy="60" r="2.5" fill="#D4AF37" stroke="none"/><circle cx="148" cy="90" r="2.5" fill="#D4AF37" stroke="none"/>
+        <text x="80" y="84" font-family="monospace" font-weight="bold" font-size="20" fill="#D4AF37" stroke="none">&lt;/&gt;</text>
+      </svg></div>
+      <h3>Programmation &amp; IA<span class="etiquette-or">Bientôt</span></h3>
+      <p class="desc">HTML, CSS et intelligence artificielle. Le futur du travail arrive au Bénin — inscris-toi sur la liste d'attente.</p>
+      <div class="tarif"><b>—</b><span>Liste d'attente</span></div>
+      <div class="go">→</div>
+    </div>
+  </a>
+
+  <p class="note-paiement rv">Un cycle complet dure <b>3 mois</b>, avec <b>1 mois de révision offert</b> · cours en semaine le soir et le week-end. Détails et inscription le jour de l'Open Class.
+     <br>🎁 <b>Réduction spéciale limitée</b> pour ceux qui s'inscrivent le jour de l'Open Class.</p>
+</section>
+
+<div class="defil clair" aria-hidden="true">
+  <div class="defil-piste inverse">
+    <span class="creux">OPEN CLASS GRATUITE</span><span><i>◆</i></span><span>PLACES LIMITÉES</span><span><i>◆</i></span>
+    <span class="creux">MÉTHODE JAPONAISE</span><span><i>◆</i></span><span>GODOMEY · COTONOU</span><span><i>◆</i></span>
+    <span class="creux">OPEN CLASS GRATUITE</span><span><i>◆</i></span><span>PLACES LIMITÉES</span><span><i>◆</i></span>
+    <span class="creux">MÉTHODE JAPONAISE</span><span><i>◆</i></span><span>GODOMEY · COTONOU</span><span><i>◆</i></span>
+  </div>
+</div>
+
+<section class="openclass" id="openclass">
+  <div class="wrap oc-g">
+    <div class="oc-flyer rv">
+      <img src="images/open-class-affiche.jpg" loading="lazy" alt="Affiche Open Class BEVA — entrée gratuite">
+    </div>
+    <div class="oc-txt">
+      <div class="micro rv">Open Class</div>
+      <h2 class="rv d1">Viens essayer.<br><em>C'est gratuit.</em></h2>
+      <p class="rv d2">L'Open Class, c'est ta porte d'entrée chez BEVA : un cours d'essai gratuit
+         et ouvert à tous. Tu découvres l'ambiance, les formateurs et la communauté —
+         sans aucun engagement.</p>
+      <div class="oc-bonus rv d3">
+        <b>🎁 Bonus jour J</b>
+        <span>Une réduction spéciale à durée limitée est réservée à ceux qui s'inscrivent
+        le jour même de l'Open Class.</span>
+      </div>
+      <p class="oc-note rv d3">Les prochaines dates sont annoncées sur WhatsApp et sur les réseaux Chado Japon.</p>
+      <a class="btn btn-or rv d4" href="https://wa.me/2290159717192">Réserver ma place&nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<section class="parcours sombre" id="parcours">
+  <img class="filigrane" src="images/marque-blanche.png" alt="" aria-hidden="true">
+  <div class="wrap tete">
+    <div class="gauche rv">
+      <div class="micro">Ton parcours</div>
+      <h2>De zéro<br><em>à pro.</em></h2>
+    </div>
+    <div class="droite rv d1">Quatre étapes simples. Pas de paperasse compliquée — tout commence sur WhatsApp.</div>
+  </div>
+  <div class="wrap etapes-g">
+    <div class="etape rv">
+      <div class="e-num">01</div>
+      <h3>Découvre l'Open Class</h3>
+      <p>Assiste gratuitement à un cours d'essai. Rencontre les formateurs, la communauté, et ressens l'ambiance BEVA avant de t'engager.</p>
+    </div>
+    <div class="etape rv d1">
+      <div class="e-num">02</div>
+      <h3>Inscris-toi sur WhatsApp</h3>
+      <p>Écris-nous : on t'explique les horaires, les places disponibles et tu choisis ta formation. <a href="https://wa.me/2290159717192">Nous écrire maintenant</a>.</p>
+    </div>
+    <div class="etape rv d2">
+      <div class="e-num">03</div>
+      <h3>Trois mois d'intensité</h3>
+      <p>Des séances de 90 minutes en classe de 10 maximum. Tu pratiques dès le premier jour : parler, créer, produire.</p>
+    </div>
+    <div class="etape rv d3">
+      <div class="e-num">04</div>
+      <h3>Passe à l'action</h3>
+      <p>Projets réels, English Only Room, événements et réseau d'anciens élèves. Ce que tu apprends à BEVA, tu l'utilises dehors.</p>
+    </div>
+  </div>
+</section>
+
+<section class="campus" id="campus">
+  <div class="wrap tete">
+    <div class="gauche rv">
+      <div class="micro">La vie BEVA</div>
+      <h2>Plus qu'une<br><em>école.</em></h2>
+    </div>
+    <div class="droite rv d1">À Godomey, le campus vit tous les jours : cours, danse, Open Class,
+      rencontres et célébrations. Voici un aperçu.</div>
+  </div>
+  <div class="wrap galerie">
+    <div class="ph a rv"><img loading="lazy" class="fond" src="images/classe-session.jpg" alt="Une classe en pleine session à BEVA"><div class="l"><small>Le campus</small><span>Une classe en pleine session</span></div></div>
+    <div class="ph b rv d1"><img class="fond" src="images/communaute-mur.jpg" loading="lazy" alt="Les élèves devant le mur bleu de BEVA"><div class="l"><small>La communauté</small><span>« Les efforts d'aujourd'hui sont la force de demain »</span></div></div>
+    <div class="ph c rv"><img class="fond" src="images/valeurs-signe.jpg" loading="lazy" alt="Amitié, Effort, Victoire — les valeurs de BEVA"><div class="l"><small>Nos valeurs</small><span>Amitié · Effort · Victoire</span></div></div>
+    <div class="ph d rv d1"><img class="fond" src="images/campus-jour.jpg" loading="lazy" alt="Le bâtiment BEVA à Atrokpocodji"><div class="l"><small>Atrokpocodji</small><span>Notre campus bleu</span></div></div>
+    <div class="ph e rv d2"><img class="fond" src="images/campus-eleves.jpg" alt="Les élèves devant le campus BEVA"><div class="l"><small>L'équipe</small><span>Devant le campus</span></div></div>
+  </div>
+</section>
+
+<section class="fondateur">
+  <div class="wrap fond-g">
+    <div class="portrait rv">
+      <img class="fond" src="images/chado-fondateur.jpg" loading="lazy" alt="Chado, fondateur de BEVA, devant le campus">
+      <div class="l">Chado — fondateur de BEVA</div>
+    </div>
+    <div class="fond-txt rv d1">
+      <blockquote>« Bénin Vivi — <span>un avenir meilleur, par les personnes.</span>
+        BEVA n'enseigne pas seulement des compétences : nous créons un lieu où l'apprentissage devient action. »</blockquote>
+      <div class="qui">
+        <div class="trait"></div>
+        <div><b>Chado</b><small>Fondateur de BEVA · Chado Japon</small></div>
+      </div>
+      <div class="fond-stats">
+        <div><b>+550K</b><span>abonnés au Bénin et en Afrique</span></div>
+        <div><b>🇯🇵 → 🇧🇯</b><span>le pont entre le Japon et le Bénin</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap tete">
+    <div class="gauche rv">
+      <div class="micro">Questions fréquentes</div>
+      <h2>Tu te<br><em>demandes ?</em></h2>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="q rv"><button><h3>Faut-il avoir de l'expérience pour s'inscrire ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>Non. Toutes nos formations partent de zéro. Que ce soit le japonais, l'anglais, le graphisme ou la vidéo, nos formateurs t'accompagnent dès les bases — l'important, c'est ta motivation.</p></div></div>
+    <div class="q rv"><button><h3>Comment fonctionne le paiement ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>Un cycle complet dure 3 mois, avec 1 mois de révision offert. Le paiement est mensuel — pas besoin de tout payer d'un coup. Les détails et une offre spéciale sont présentés le jour de l'Open Class. Contacte-nous sur WhatsApp pour t'inscrire.</p></div></div>
+    <div class="q rv"><button><h3>Quels sont les horaires des cours ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>Les cours ont lieu en semaine le soir et le week-end, en séances de 90 minutes. Les horaires exacts de chaque classe te sont communiqués sur WhatsApp au moment de l'inscription.</p></div></div>
+    <div class="q rv"><button><h3>Où se trouve BEVA ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>Notre campus se trouve à Atrokpocodji (Godomey, Cotonou) — ancien impôt, première rue à droite. Cherche le grand bâtiment bleu ! Écris-nous sur WhatsApp au +229 01 59 71 71 92 et nous t'envoyons la localisation exacte.</p></div></div>
+    <div class="q rv"><button><h3>C'est quoi, l'Open Class ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>L'Open Class est un cours d'essai gratuit et ouvert à tous. Tu découvres l'ambiance, les formateurs et la communauté BEVA avant de t'inscrire. Suis-nous sur les réseaux Chado Japon pour connaître les prochaines dates.</p></div></div>
+    <div class="q rv"><button><h3>Pourquoi « la méthode japonaise » ?</h3><div class="plus">+</div></button>
+      <div class="rep"><p>Ponctualité, rigueur, qualité et respect : nous appliquons à BEVA la discipline qui fait la réputation du Japon. C'est cette exigence qui transforme un cours en véritable progression.</p></div></div>
+  </div>
+</section>
+
+<section class="final">
+  <img class="fond" src="images/campus-soir.jpg" loading="lazy" alt="" aria-hidden="true">
+  <h2 class="rv" style="position:relative">Prêt à <em>commencer ?</em></h2>
+  <p class="rv d1">Les classes sont limitées à 10 élèves. Réserve ta place — la prochaine session se remplit vite.</p>
+  <a class="btn btn-or rv d2" href="https://wa.me/2290159717192">Nous écrire sur WhatsApp&nbsp;→</a>
+</section>
+
+<footer>
+  <div class="pied-haut">
+    <div>
+      <img src="images/logo-beva-or.png" alt="BEVA — Bénin Vivi Académie">
+      <p>L'école de formation professionnelle qui relie le Bénin au Japon et au monde.
+         Atrokpocodji, Godomey — Cotonou, Bénin.<br>WhatsApp : +229 01 59 71 71 92</p>
+    </div>
+    <div>
+      <h4>Formations</h4>
+      <ul>
+        <li><a href="#formations">Japonais</a></li>
+        <li><a href="#formations">Anglais</a></li>
+        <li><a href="#formations">Graphisme</a></li>
+        <li><a href="#formations">Montage vidéo</a></li>
+        <li><a href="#formations">Programmation &amp; IA</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Nous suivre</h4>
+      <ul>
+        <li><a href="https://www.tiktok.com/@chadojapon" target="_blank" rel="noopener">TikTok — Chado Japon</a></li>
+        <li><a href="https://www.facebook.com/chadojapon" target="_blank" rel="noopener">Facebook — Chado Japon</a></li>
+        <li><a href="https://www.instagram.com/chadojapon" target="_blank" rel="noopener">Instagram — Chado Japon</a></li>
+        <li><a href="https://wa.me/2290159717192">WhatsApp — +229 01 59 71 71 92</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="pied-titan" aria-hidden="true">BEVA</div>
+  <div class="pied-bas">
+    <span>© 2026 BEVA — Bénin Vivi Académie</span>
+    <span>Soutenu depuis le Japon par NPO ONYVA</span>
+  </div>
+</footer>
+
+<script>
+// ---- nav au défilement
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('plein',scrollY>40),{passive:true});
+
+// ---- menu mobile
+const burger=document.getElementById('burger'),liens=document.getElementById('liens');
+burger.addEventListener('click',()=>{burger.classList.toggle('x');liens.classList.toggle('ouvert')});
+liens.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  burger.classList.remove('x');liens.classList.remove('ouvert')}));
+
+// ---- apparitions
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}
+}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ---- compteurs
+const mvt=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ioC=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target,fin=+el.dataset.cible;ioC.unobserve(el);
+  if(!mvt){el.textContent=fin;return}
+  const t0=performance.now(),dur=1600;
+  (function tic(t){const p=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-p,4);
+    el.textContent=Math.round(fin*ease);
+    if(p<1)requestAnimationFrame(tic)})(t0);
+}),{threshold:.5});
+document.querySelectorAll('.compteur').forEach(el=>ioC.observe(el));
+
+// ---- ページ内スクロール（サンドボックス環境でも動くようJS制御）
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const cible=document.querySelector(a.getAttribute('href'));
+    if(!cible)return;
+    e.preventDefault();
+    cible.scrollIntoView({behavior:mvt?'smooth':'auto',block:'start'});
+  });
+});
+
+// ---- FAQ accordéon
+document.querySelectorAll('.q button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const q=btn.parentElement,rep=q.querySelector('.rep'),ouvert=q.classList.contains('ouvert');
+    document.querySelectorAll('.q.ouvert').forEach(o=>{
+      o.classList.remove('ouvert');o.querySelector('.rep').style.maxHeight=null});
+    if(!ouvert){q.classList.add('ouvert');rep.style.maxHeight=rep.scrollHeight+'px'}
+  });
+});
+
+// ---- curseur personnalisé
+if(matchMedia('(pointer:fine)').matches){
+  const c=document.querySelector('.curseur');
+  addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px'});
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>c.classList.add('grand'));
+    el.addEventListener('mouseleave',()=>c.classList.remove('grand'));
+  });
+}
+</script>
+</body>
+</html>
