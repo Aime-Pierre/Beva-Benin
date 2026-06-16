@@ -336,6 +336,23 @@ footer{background:var(--abysse);color:rgba(255,255,255,.7);overflow:hidden}
   body.menu-ouvert{overflow:hidden;height:100%}
 }
 
+
+/* ====== bouton flottant S'inscrire ====== */
+#inscrire-btn{
+  position:fixed;bottom:5.6rem;right:1.4rem;z-index:400;
+  padding:.65rem 1.1rem;border-radius:2rem;border:none;cursor:pointer;
+  background:var(--bleu,#0B3D91);color:#fff;
+  font-family:var(--s);font-size:.78rem;font-weight:700;letter-spacing:.04em;
+  text-decoration:none;display:flex;align-items:center;gap:.45rem;
+  box-shadow:0 6px 24px rgba(11,61,145,.4);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+  white-space:nowrap;
+}
+#inscrire-btn.visible{opacity:1;transform:none;pointer-events:auto}
+#inscrire-btn:hover{background:#0a2f72;transform:translateY(-3px);box-shadow:0 10px 28px rgba(11,61,145,.5)}
+#inscrire-btn svg{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+
 /* ====== bouton retour en haut ====== */
 #top-btn{
   position:fixed;bottom:1.6rem;right:1.4rem;z-index:400;
@@ -353,6 +370,10 @@ footer{background:var(--abysse);color:rgba(255,255,255,.7);overflow:hidden}
 </head>
 <body>
 
+<a id="inscrire-btn" href="https://wa.me/2290159717192" target="_blank" rel="noopener" aria-label="S'inscrire">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.112 1.524 5.843L.057 23.428a.75.75 0 0 0 .916.916l5.585-1.467A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.725 9.725 0 0 1-4.964-1.358l-.355-.213-3.676.965.982-3.584-.233-.369A9.718 9.718 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+  S'inscrire
+</a>
 <button id="top-btn" aria-label="Retour en haut">↑</button>
 <div class="curseur" aria-hidden="true"></div>
 
@@ -742,6 +763,11 @@ if(matchMedia('(pointer:fine)').matches){
     el.addEventListener('mouseleave',()=>c.classList.remove('grand'));
   });
 }
+
+
+// ---- bouton flottant S'inscrire
+const inscrireBtn=document.getElementById('inscrire-btn');
+addEventListener('scroll',()=>inscrireBtn.classList.toggle('visible',scrollY>400),{passive:true});
 
 // ---- bouton retour en haut
 const topBtn=document.getElementById('top-btn');
